@@ -14,7 +14,7 @@ import frame3 from "../../assets/frame3.svg";
 import frame4 from "../../assets/frame4.svg";
 import family from "../../assets/family.svg";
 import boychild from "../../assets/boychild.svg";
-import women from "../../assets/women.svg";
+import women from "../../assets/women.png";
 import chatbot from "../../assets/ChatBot.svg";
 import Card from "../../components/Card";
 import { Link, useNavigate } from "react-router-dom";
