@@ -25,9 +25,11 @@ const PregnantVaccinations = () => {
                 <h4 className="text-center mb-4 text-xl font-semibold">{item.name}</h4>
                 {item.types.map((type, index) => (
                   <div className="p-4 flex flex-row-reverse justify-between" key={index}>
-                    <div className="bg-[#196B69] size-[35px] rounded-full flex justify-center items-center text-white">
-                      <i class="fa-solid fa-angle-left"></i>
-                    </div>
+                    <Link to="/ChatBot">
+                      <div className="bg-[#196B69] size-[35px] rounded-full flex justify-center items-center text-white">
+                        <i class="fa-solid fa-angle-left"></i>
+                      </div>
+                    </Link>
                     <span>{type}</span>
                   </div>
                 ))}

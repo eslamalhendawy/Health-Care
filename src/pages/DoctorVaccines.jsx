@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 import chatbot from "../assets/ChatBot.svg";
+import previous from "../assets/Vector.png";
 
 const templist = ["التهاب الكبد", "التهاب الكبد", "التهاب الكبد", "التهاب الكبد", "التهاب الكبد", "التهاب الكبد", "الحصبة"];
 
@@ -21,6 +22,12 @@ const DoctorVaccines = () => {
       <Navbar />
       <section className="bg-[#f6f6f6] minHeight">
         <div dir="rtl" className="mt-[100px] container mx-auto py-6 px-4 ">
+          <div className="flex justify-end">
+            <Link to="/previous-vaccinations" className="flex w-fit gap-2 items-center text-lg relative text-[#000000CC] mb-4 outline-none">
+              <div className="absolute h-[2px] w-full bg-[#000000CC] bottom-0" />
+              التطعيمات السابقة <img src={previous} alt="" />
+            </Link>
+          </div>
           <h1 className="text-center font-semibold  text-2xl mt-12 mb-6">التطعيمات</h1>
           <div className="flex justify-center mb-12">
             <input onChange={(e) => setQuery(e.target.value)} className="text-right border-[#28CC9E] focus:outline-none min-w-[350px] rounded-lg" type="text" placeholder="ابحث" />
@@ -42,7 +49,7 @@ const DoctorVaccines = () => {
       </div>
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default DoctorVaccines
+export default DoctorVaccines;

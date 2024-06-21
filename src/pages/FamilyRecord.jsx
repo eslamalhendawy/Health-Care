@@ -6,6 +6,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import AddIllnessModal from "../components/AddIllnessModal";
 
 import chatbot from "../assets/ChatBot.svg";
 import image from "../assets/familyRecord.svg";
@@ -41,11 +42,7 @@ const FamilyRecord = () => {
                 </AccordionDetails>
               </Accordion>
             ))}
-            {role === "admin" && (
-              <div className="bg-[#E6E6E6] text-white flex justify-center items-center h-[180px] text-8xl cursor-pointer">
-                <i className="fa-solid fa-plus"></i>
-              </div>
-            )}
+            {role === "admin" && <AddIllnessModal />}
           </div>
         </div>
       </section>
@@ -58,5 +55,6 @@ const FamilyRecord = () => {
     </>
   );
 };
+
 
 export default FamilyRecord;
