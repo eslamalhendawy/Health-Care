@@ -12,7 +12,7 @@ const Slider = ({ data }) => {
   return (
     <div>
       <Swiper
-        rtl={true}
+        rtl="true"
         className="mb-6"
         slidesPerGroup={1}
         pagination={{ dynamicBullets: true }}

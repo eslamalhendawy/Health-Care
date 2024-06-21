@@ -26,7 +26,7 @@ const Vaccines = () => {
               <span>الحوامل</span>
               <div className="bg-white size-[45px] flex items-center justify-center rounded-full text-3xl">
                 <Link to="/pregnant-vaccinations">
-                  <i class="fa-solid fa-arrow-left"></i>
+                  <i className="fa-solid fa-arrow-left"></i>
                 </Link>
               </div>
             </div>
@@ -37,7 +37,7 @@ const Vaccines = () => {
               <span>الاطفال</span>
               <div className="bg-white size-[45px] flex items-center justify-center rounded-full text-3xl">
                 <Link to="/baby-vaccinations">
-                  <i class="fa-solid fa-arrow-left"></i>
+                  <i className="fa-solid fa-arrow-left"></i>
                 </Link>
               </div>
             </div>
@@ -50,7 +50,7 @@ const Vaccines = () => {
               <span>الاوبئة</span>
               <div className="bg-white size-[45px] flex items-center justify-center rounded-full text-3xl">
                 <Link to="/epidemic-vaccinations">
-                  <i class="fa-solid fa-arrow-left"></i>
+                  <i className="fa-solid fa-arrow-left"></i>
                 </Link>
               </div>
             </div>
@@ -61,7 +61,7 @@ const Vaccines = () => {
               <span>السفر</span>
               <div className="bg-white size-[45px] flex items-center justify-center rounded-full text-3xl">
                 <Link to="/travel-vaccinations">
-                  <i class="fa-solid fa-arrow-left"></i>
+                  <i className="fa-solid fa-arrow-left"></i>
                 </Link>
               </div>
             </div>
