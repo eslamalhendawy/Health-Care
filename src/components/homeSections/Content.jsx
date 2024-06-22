@@ -92,11 +92,11 @@ const Content = () => {
                   <div className="flex gap-x-20 ">
                     <Card title="التاريخ المرضي" description="نسجيل و نتابعة حالتك الصحية و زياراتك للطبيب بشكل دقيق و منظم." imageSrc1={frame2} imageSrc2={doctor2} linkTo="/MedicalHistory" />
 
-                    <Card title="التطعيمات" description="التطعيم المناسب لحالتك وحسب احتياجك، وأيضًا جميع التطعيمات متوفرة مع تفاصيل عنها." imageSrc1={frame1} imageSrc2={doctor1} linkTo="/Vaccinations" />
+                    <Card title="التطعيمات" description="التطعيم المناسب لحالتك وحسب احتياجك، وأيضًا جميع التطعيمات متوفرة مع تفاصيل عنها." imageSrc1={frame1} imageSrc2={doctor1} linkTo="/vaccines" />
                   </div>
                   <div className="flex gap-x-20">
                     <Card title="الفحص الكامل" description="نحتفظ بجميع التحاليل و الفحوصات الخاصة بصحتك بشكل منظم حتى الحاجة إليها." imageSrc1={frame4} imageSrc2={doctor4} linkTo="/CompleteExamination" />
-                    <Card title="السجل العائلي" description="ُسجل فيها الأمراض المزمنة لأفراد العائلة مع نصائح للوقاية من الأمراض المزمنة " imageSrc1={frame3} imageSrc2={doctor3} linkTo="/FamilyRegistry" />
+                    <Card title="السجل العائلي" description="ُسجل فيها الأمراض المزمنة لأفراد العائلة مع نصائح للوقاية من الأمراض المزمنة " imageSrc1={frame3} imageSrc2={doctor3} linkTo="/family-record" />
                   </div>
                 </div>
               </div>

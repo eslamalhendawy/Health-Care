@@ -88,14 +88,19 @@ const Login = ({ setIsAuthenticated }) => {
 
     try {
       const response = await dispatch(loginAsync(userData));
+      console.log(response);
 
       if (response.payload && response.payload.status === true) {
         localStorage.setItem("token", response.payload.token);
-        localStorage.setItem("role", response.payload.user.roles); // Save user role
-
+        localStorage.setItem("role", response.payload.user.roles);
+        localStorage.setItem("patientID", response.payload.user._id); // Save user role
         setIsAuthenticated(true);
-        navigate("/");
-        window.location.reload();
+        if (response.payload.user.roles === "admin") {
+          navigate("/patient-search");
+        } else {
+          navigate("/");
+        }
+        // window.location.reload();
       } else if (response.payload && response.payload.status === false) {
         openModal(response.payload.message || "فشل تسجيل الدخول");
       } else if (response.error && response.error.response && response.error.response.data && response.error.response.data.errors) {

@@ -10,10 +10,10 @@ const PatientSearch = () => {
   const navigate = useNavigate();
 
   const handleSearch = async () => {
-    const responese = await postData("search/userSearch", { email, NationalID });
-    console.log(responese);
-    if (responese.status === true) {
-      localStorage.setItem("patientID", responese.user._id);
+    const response = await postData("search/userSearch", { email, NationalID });
+    console.log(response);
+    if (response.status === true) {
+      localStorage.setItem("patientID", response.user._id);
       navigate("/");
     }
   };

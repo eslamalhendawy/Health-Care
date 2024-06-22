@@ -6,7 +6,9 @@ import "swiper/css/pagination";
 
 import AddHistoryModal from "../components/AddHistoryModal";
 
-const Slider = ({ data }) => {
+import empty from "../assets/empty.png";
+
+const Slider = ({ data, type, colors }) => {
   const role = localStorage.getItem("role");
 
   return (
@@ -30,22 +32,23 @@ const Slider = ({ data }) => {
           },
         }}
       >
+        {data.length === 0 && (
+          <SwiperSlide className="mb-6">
+            <div className="bg-[#E6E6E6] h-[308px] rounded-lg flex flex-col gap-2 justify-center items-center p-4">
+              <img src={empty} alt="" />
+              <p className="font-semibold text-lg">لا يوجد بيانات حاليا</p>
+            </div>
+          </SwiperSlide>
+        )}
         {data.map((item, index) => (
           <SwiperSlide className="mb-6" key={index}>
-            <div className={`bg-[${item.bgColor}] p-4 rounded-lg border-2 border-[#28CC9E]`}>
-              <h4 className={`text-center bg-[${item.headerBg}] w-fit mx-auto py-2 px-3 rounded-2xl text-[${item.headerColor}] font-medium mb-4`}>{item.name}</h4>
-              <p className="text-center mb-6">الملاحظات</p>
-              <div className="grid grid-cols-2 gap-6 mb-6">
-                {item.medicine.map((med, index) => (
-                  <div className="flex items-center gap-2" key={index}>
-                    <div className="bg-black size-[10px] rounded-full" />
-                    <p className="text-center">{med}</p>
-                  </div>
-                ))}
-              </div>
+            <div className={`bg-[${colors.bgColor}] p-4 rounded-lg border-2 border-[#28CC9E]`}>
+              <h4 className={`text-center text-xl bg-[${colors.headerBg}] w-fit mx-auto py-2 px-3 rounded-2xl text-[${colors.headerColor}] font-medium mb-4`}>{item.name}</h4>
+              <p className="text-center  font-semibold mb-6">الملاحظات</p>
+              <p className="mb-6 text-lg">{item.advice}</p>
               <div className="flex items-center justify-between">
                 <span>{item.doctor}</span>
-                <span>{item.date}</span>
+                <span>{item.createdAt.split("T")[0]}</span>
               </div>
             </div>
             <div className="hidden bg-[#37C8BF4D]" />
@@ -53,8 +56,8 @@ const Slider = ({ data }) => {
         ))}
         {role === "admin" && (
           <SwiperSlide className="mb-6">
-            <div className="bg-[#E6E6E6] h-[308px] rounded-lg flex justify-center items-center">
-              <AddHistoryModal />
+            <div className="bg-[#E6E6E6] hover:bg-[#a8a5a5] duration-200 h-[212px] rounded-lg flex justify-center items-center">
+              <AddHistoryModal type={type} />
             </div>
           </SwiperSlide>
         )}

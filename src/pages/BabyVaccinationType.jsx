@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { getData } from "../Services/apiCalls";
 
@@ -8,14 +8,15 @@ import Footer from "../components/Footer";
 
 import chatbot from "../assets/ChatBot.svg";
 
-const EpidemicVaccinations = () => {
+const BabyVaccinationType = () => {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
+  const { id } = useParams();
 
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
-      const response = await getData("item/get_Item", {}, "6664d153066089b0f8abed6c");
+      const response = await getData("item/get_Item", {}, id);
       setList(response);
       setLoading(false);
     };
@@ -27,17 +28,20 @@ const EpidemicVaccinations = () => {
       <Navbar />
       <section className="bg-[#f6f6f6] minHeight">
         <div dir="rtl" className="mt-[100px] container mx-auto py-6 px-4 ">
-          <h1 className="text-center font-semibold  text-2xl mt-12 mb-12">تطعيمات الاوبئة</h1>
+          <h1 className="text-center font-semibold  text-2xl mt-12 mb-12">تطعيمات الاطفال</h1>
           {loading ? (
             <div className="text-center text-xl font-semibold">جاري التحميل</div>
           ) : (
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-[70px]">
               {list.map((item, index) => (
-                <Link to={`/epidemic-vaccination/${item._id}`} className="bg-[#28CC9E4D] hover:bg-[#6bb19e4d] duration-200 p-6 rounded-xl" key={index}>
+                <div  className="bg-[#28CC9E4D] hover:bg-[#6bb19e4d] duration-200 p-6 rounded-xl" key={index}>
                   <h4 className="text-center text-xl font-semibold">{item.name}</h4>
-                </Link>
+                </div>
               ))}
             </div>
+          )}
+          {!loading && list.length === 0 && (
+            <div className="text-center text-xl font-semibold">لا يوجد بيانات</div>  
           )}
         </div>
       </section>
@@ -48,7 +52,7 @@ const EpidemicVaccinations = () => {
       </div>
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default EpidemicVaccinations;
+export default BabyVaccinationType

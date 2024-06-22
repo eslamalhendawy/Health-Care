@@ -1,4 +1,7 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
+import { getData } from "../Services/apiCalls";
 
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -11,14 +14,24 @@ import AddIllnessModal from "../components/AddIllnessModal";
 import chatbot from "../assets/ChatBot.svg";
 import image from "../assets/familyRecord.svg";
 import heart from "../assets/heart.png";
-
-const list = [
-  { title: "Diabetes Melitus مرض السكري", comment: "نصائح لحمايتك من مرض السكري", text: "تأكد من الحفاظ على وزن صحي ومتوازن من خلال ممارسة الرياضة بانتظام وتناول طعام صحي ومتوازن.قلل من استهلاك السكريات والدهون المشبعة في النظام الغذائي، وزود بالفواكه والخضروات و الحبوب الكاملة. قم بفحص مستوى السكر في الدم بانتظام و اتبع توصيات الطبيب بخصوص الفحوصات والاختبارات اللازمة." },
-  { title: "Diabetes Melitus مرض السكري", comment: "نصائح لحمايتك من مرض السكري", text: "تأكد من الحفاظ على وزن صحي ومتوازن من خلال ممارسة الرياضة بانتظام وتناول طعام صحي ومتوازن.قلل من استهلاك السكريات والدهون المشبعة في النظام الغذائي، وزود بالفواكه والخضروات و الحبوب الكاملة. قم بفحص مستوى السكر في الدم بانتظام و اتبع توصيات الطبيب بخصوص الفحوصات والاختبارات اللازمة." },
-];
+import empty from "../assets/empty.png";
 
 const FamilyRecord = () => {
+  const [loading, setLoading] = useState(false);
+  const [list, setList] = useState([]);
   const role = localStorage.getItem("role");
+  const patientID = localStorage.getItem("patientID");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      const response = await getData("Admin/getItemsByCategory", {}, "66266c65a068dc4d7041ba00", patientID);
+      setList(response);
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -27,21 +40,36 @@ const FamilyRecord = () => {
           <div className="pt-12 basis-1/3">
             <img src={image} alt="" />
           </div>
-          <div className="pt-12 basis-2/3 flex flex-col gap-6">
-            {list.map((item, index) => (
-              <Accordion key={index} className="group">
-                <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
-                  <p className="text-right ml-auto font-semibold text-xl">{item.title}</p>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <div className="mb-4 flex items-center justify-end gap-2">
-                    <img className="size-[35px]" src={heart} alt="" />
-                    <p className="text-right text-[#2CB438] font-semibold text-xl">{item.comment}</p>
-                  </div>
-                  <p className="text-right ml-auto text-[#000000BF] text-lg">{item.text}</p>
-                </AccordionDetails>
-              </Accordion>
-            ))}
+          <div className="pt-24 basis-2/3 flex flex-col gap-6">
+            {loading ? (
+              <p className="text-right text-xl font-semibold">جاري التحميل</p>
+            ) : (
+              list.map((item, index) => (
+                <Accordion key={index} className="group">
+                  <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
+                    <p className="text-right ml-auto font-semibold text-xl">{item.name}</p>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <div className="mb-4 flex items-center justify-end gap-2">
+                      <img className="size-[35px]" src={heart} alt="" />
+                      <div className="text-right text-[#2CB438] font-semibold text-xl flex flex-row-reverse gap-1">
+                        <span>نصائح لحمايتك من </span>
+                        <span>{item.name}</span>
+                      </div>
+                    </div>
+                    <p className="text-right ml-auto text-[#000000BF] text-lg">{item.advice}</p>
+                  </AccordionDetails>
+                </Accordion>
+              ))
+            )}
+            {!loading && list.length === 0 && (
+              <div className="flex flex-col justify-end items-end">
+                <div>
+                  <img className="max-w-[350px] mb-5" src={empty} alt="" />
+                  <p className="text-center text-lg font-semibold">لا يوجد سجلات حتى الآن</p>
+                </div>
+              </div>
+            )}
             {role === "admin" && <AddIllnessModal />}
           </div>
         </div>
@@ -55,6 +83,5 @@ const FamilyRecord = () => {
     </>
   );
 };
-
 
 export default FamilyRecord;

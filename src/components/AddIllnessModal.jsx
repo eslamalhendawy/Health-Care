@@ -1,11 +1,21 @@
 import { useState } from "react";
+import { postData } from "../Services/apiCalls";
 
 import Modal from "@mui/material/Modal";
 
 const AddIllnessModal = () => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
-  const [notes, setNotes] = useState("");
+  const [advice, setAdvice] = useState("");
+
+  const handleSubmit = async () => {
+    const response = await postData("Admin/create_Item", { name, advice }, {}, "66266c65a068dc4d7041ba00", localStorage.getItem("patientID"));
+    if (response.success === true) {
+      setOpen(false);
+      window.location.reload();
+    }
+  };
+
   return (
     <>
       <button onClick={() => setOpen(true)} className="bg-[#E6E6E6] hover:bg-[#a8a5a5] duration-200 outline-none text-white flex justify-center items-center h-[180px] text-8xl cursor-pointer">
@@ -19,13 +29,13 @@ const AddIllnessModal = () => {
               <h4 className="font-semibold text-xl grow text-center">اضافة المرض</h4>
             </div>
             <div className="flex justify-end text-right mb-8">
-              <input type="text" className="text-right border-[#28CC9E] focus:outline-none min-w-[350px] rounded-lg" placeholder="اسم المرض" />
+              <input onChange={(e) => setName(e.target.value)} type="text" className="text-right border-[#28CC9E] focus:outline-none min-w-[350px] rounded-lg" placeholder="اسم المرض" />
             </div>
             <div className="flex justify-end text-right mb-8">
-              <textarea name="" id="" className="text-right border-[#28CC9E] outline-none w-full h-[300px] rounded-lg resize-none" placeholder="اضف ملاحظة"></textarea>
+              <textarea onChange={(e) => setAdvice(e.target.value)} className="text-right border-[#28CC9E] outline-none w-full h-[300px] rounded-lg resize-none" placeholder="اضف ملاحظة"></textarea>
             </div>
             <div className="flex justify-center">
-              <button className="bg-[#28CC9E] text-lg py-2 w-[60%] rounded-lg">اضف</button>
+              <button onClick={handleSubmit} className="bg-[#28CC9E] text-lg py-2 w-[60%] rounded-lg">اضف</button>
             </div>
           </div>
         </div>
